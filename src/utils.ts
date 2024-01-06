@@ -5,7 +5,11 @@ export function html2dom(html: string): Element {
 }
 
 export function assertHTMLElement(elm: Element): asserts elm is HTMLElement {
-    if (!(elm instanceof HTMLElement)) {
-        throw new Error(`Element is not an HTML element`);
-    }
+  if (!(elm instanceof HTMLElement)) {
+    throw new Error(`Element is not an HTML element`);
+  }
+}
+
+export function markAsProcessed(elm: Element) {
+  elm.setAttribute("bq-confirm-dialog", "processed");
 }
