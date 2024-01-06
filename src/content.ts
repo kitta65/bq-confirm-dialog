@@ -1,3 +1,5 @@
+import { assertHTMLElement, html2dom } from "./utils.ts";
+
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     mutation.addedNodes.forEach((node) => {
@@ -9,7 +11,11 @@ const observer = new MutationObserver((mutations) => {
           const attribute = "has-bq-confirm-dialog-lister";
           if (button.getAttribute(attribute) === "true") return;
           button.setAttribute(attribute, "true");
-          button.addEventListener("click", () => {
+          const dummy = html2dom(`<button>RUN</button>`);
+          button.parentNode!.insertBefore(dummy, button);
+          assertHTMLElement(button);
+          button.style.display = "none";
+          dummy.addEventListener("click", () => {
             // NOTE not fiered when console is empty
             console.log("clicked");
           });
