@@ -1,5 +1,10 @@
 import { assertHTMLElement, html2dom, markAsProcessed } from "./utils.ts";
 
+const popover = html2dom(
+  `<div id='bq-confirm-dialog' popover>this is popover</div>`
+);
+document.body.append(popover);
+
 const observer = new MutationObserver((mutations) => {
   mutations.forEach((mutation) => {
     mutation.addedNodes.forEach((node) => {
@@ -30,7 +35,9 @@ const observer = new MutationObserver((mutations) => {
 
         // create dummy button
         // TODO ▶ is a little ugly, use svg file instead
-        const dummy = html2dom(`<button>▶ RUN</button>`);
+        const dummy = html2dom(
+          `<button popovertarget='bq-confirm-dialog' popovertargetaction='show'>▶ RUN</button>`
+        );
         dummy.setAttribute("class", button.getAttribute("class") || "");
         markAsProcessed(dummy);
         button.parentNode!.insertBefore(dummy, button);
@@ -40,13 +47,14 @@ const observer = new MutationObserver((mutations) => {
         // add event listener
         dummy.addEventListener("click", () => {
           dummy.setAttribute("class", button.getAttribute("class") || "");
-          button.click();
+          // button.click();
         });
         const observer = new MutationObserver((mutations) => {
           mutations.forEach((mutation) => {
             const text = mutation.target.nodeValue || "";
             console.log(text);
             dummy.setAttribute("class", button.getAttribute("class") || "");
+            dummy.setAttribute("bq-confirm-dialog-cost", "500");
           });
         });
         observer.observe(state, { subtree: true, characterData: true });

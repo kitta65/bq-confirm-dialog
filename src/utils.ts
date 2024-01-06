@@ -13,3 +13,7 @@ export function assertHTMLElement(elm: Element): asserts elm is HTMLElement {
 export function markAsProcessed(elm: Element) {
   elm.setAttribute("bq-confirm-dialog", "processed");
 }
+
+// const re = /\d(\.\d+)?\s*.B/
+// export function extractCost(state: string) {
+// }
