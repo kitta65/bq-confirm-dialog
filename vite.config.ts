@@ -8,9 +8,6 @@ const manifest = defineManifest(async () => ({
   manifest_version: 3,
   name: "BigQuery Confirm Dialog",
   version: packageJson.version,
-  action: {
-    default_popup: "index.html",
-  },
   content_scripts: [
     {
       js: ["src/content.ts"],
