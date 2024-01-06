@@ -15,5 +15,6 @@ export function markAsProcessed(elm: Element) {
 }
 
 // const re = /\d(\.\d+)?\s*.B/
-// export function extractCost(state: string) {
-// }
+export function extractCost(state: string): Number {
+  return Number(state);
+}

@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from "vite";
 import { defineManifest } from "@crxjs/vite-plugin";
 import { crx } from "@crxjs/vite-plugin";
@@ -21,4 +22,5 @@ const manifest = defineManifest(async () => ({
 
 export default defineConfig({
   plugins: [crx({ manifest })],
+  test: {},
 });
