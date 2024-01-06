@@ -11,6 +11,15 @@ const manifest = defineManifest(async () => ({
   action: {
     default_popup: "index.html",
   },
+  content_scripts: [
+    {
+      js: ["src/content.ts"],
+      matches: [
+        "https://console.cloud.google.com/bigquery",
+        "https://console.cloud.google.com/bigquery?*",
+      ],
+    },
+  ],
 }));
 
 export default defineConfig({
